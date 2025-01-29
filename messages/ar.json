@@ -1,0 +1,71 @@
+{
+  "header":{
+    "notifications": "إشعارات",
+    "announcements": "الإعلانات",
+    "translation": "ترجمة"
+    },
+
+
+    "common":{
+    "home": "الصفحة الرئيسية",
+    "message": "مرحبًا أنجلينا سميث",
+    "from": "نشط منذ",
+    "clock": "سجل الدخول"
+    },
+    "project":{
+    "project": "مشروع"
+    },
+     "dashboard":{
+      "openTasks": "المهام المفتوحة",
+      "projects": "المشاريع",
+      "hrsLogged": "ساعات متصلة/شهر",
+      "hrs": "ساعة"
+      },
+
+   "announcement":{ 
+       "announcement": "الإعلان"
+       },
+       "todayTasks":{
+         "todayTasks": "المهام اليومية",
+         "uncollapseAll": "فك الكل",
+         "collapseAll": "اطوي الكل"
+         },
+         "customersTickets":{
+           "customersTickets": "التذاكر العملاء",
+           "uncollapseAll": "فك الكل",
+           "collapseAll": "اطوي الكل"
+           },
+           "sidebar":{
+            "angela": "أنجلينا سميث",
+            "designer": "مصمم",
+             "home": "الرئيسية",
+             "projects": "المشاريع",
+             "notes": "الملاحظات",
+             "finance": "المال",
+             "attendance": "الحضور",
+             "users": "المستخدمين",
+             "dailyReport": "التقرير اليومي",
+             "contracts": "العقود",
+             "settings": "الإعدادات",
+             "logout": "تسجيل الخروج"
+             },
+
+             "login":{
+               "email": "البريد الإلكتروني",
+               "password": "كلمة المرور",
+               "username": "اسم المستخدم",
+               "usernameRequired": "اسم المستخدم مطلوب!",
+               "loginFailed": "اسم المستخدم أو كلمة المرور خاطئة!",
+               "rememberMe": "تذكرني",
+               "forgotPassword": "نسيت كلمة المرور؟",
+               "login": "تسجيل الدخول",
+               "emailRequired": "البريد الإلكتروني مطلوب!",
+               "passwordRequired": "كلمة المرور مطلوبة!",
+               "welcomeBack": "مرحبًا بعودتك!",
+               "english": "الإنجليزية",
+               "french": "الفرنسية",
+               "arabic": "العربية"
+               }
+  }
+  
+

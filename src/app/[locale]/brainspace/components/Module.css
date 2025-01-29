@@ -1,0 +1,19 @@
+.swiper-pagination {
+    margin-bottom: 20px;
+    /* Adjust space between dots and footer */
+}
+
+.custom-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
+    /* Default color for dots */
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+.custom-dot:hover {
+    background-color: #000;
+    /* Hover effect */
+}

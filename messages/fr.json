@@ -1,0 +1,68 @@
+
+{
+  "header":{
+    "notifications": "Notifications",
+    "announcements": "Annonces",
+    "translation": "Traduction"
+    },
+
+  "common":{
+  "home": "Accueil",
+  "message": "Bienvenue Angelina Smith",
+  "from": "Actif depuis",
+  "clock": "Horloge en"
+  },
+  "project":{
+    "project": "Projet"
+    }
+    ,
+"dashboard":{ 
+      "openTasks": "Tâches ouvertes",
+      "projects": "Projets",
+      "hrsLogged": "Heures connectées/mois",
+      "hrs": "hrs"
+      },
+      "announcement":{    
+          "announcement": "Annonce"
+          },
+          "todayTasks":{
+            "todayTasks": "Tâches aujourd'hui",
+            "uncollapseAll": "Déplier tout",
+            "collapseAll": "Replier tout"
+            },
+            "customersTickets":{
+              "customersTickets": "Tickets clients",
+              "uncollapseAll": "Déplier tout",
+              "collapseAll": "Replier tout"
+              },
+              "sidebar":{
+                "angela": "Angelina Smith",
+                "designer": "Designer",
+                "home": "Accueil",
+                "projects": "Projets",
+                "notes": "Notes",
+                "finance": "Finance",
+                "attendance": "Attendance",
+                "users": "Utilisateurs", 
+                "dailyReport": "Rapport quotidien",
+                "contracts": "Contrats",
+                "settings": "Paramètres",
+                "logout": "Déconnexion"
+                },
+                "login":{
+                  "email": "Email",
+                  "password": "Mot de passe",
+                  "usernameRequired": "Le nom d'utilisateur est requis!",
+                  "username": "Nom d'utilisateur",
+                  "loginFailed": "Mauvais nom d'utilisateur ou mot de passe!",
+                  "rememberMe": "Se souvenir de moi",
+                  "forgotPassword": "Mot de passe oublié?",
+                  "login": "Connexion",
+                  "emailRequired": "L'email est requis!",
+                  "passwordRequired": "Le mot de passe est requis!",
+                  "welcomeBack": "Bienvenue de retour!",
+                  "english": "Anglais",
+                  "french": "Français",
+                  "arabic": "العربية"
+                  }
+}

@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --main-color: #007bff;
+  --bg-color: #f4f4f4;
+  --main-color-dark: #0056b3;
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+
+/* Custom Pagination Styles */
+.custom-swiper-pagination .swiper-pagination-bullet {
+  width: var(--swiper-pagination-bullet-size) !important;
+  height: var(--swiper-pagination-bullet-size) !important;
+  background-color: #d9d9d9 !important;
+  /* Default bullet color */
+  text-outline: var(--swiper-pagination-bullet-size) !important;
+  border-radius: 50%;
+  /* Keep bullets circular */
+  opacity: 1 !important;
+  /* Fully opaque */
+}
+
+/* Custom Pagination Styles */
+.custom-paginator .p-paginator-page.p-highlight {
+  background-color: var(--main-color) !important;
+  color: white !important;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+
+body {
+  color: rgb(var(--foreground-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.card {
+  background: var(--surface-card);
+  border-radius: 10px;
+}
+
+/* Custom style for active page in paginator */
+.p-paginator-page.p-highlight {
+  background-color: #42a5f5;
+  /* Blue color for the active page */
+  color: white;
+  /* White text for contrast */
+  font-weight: bold;
+  /* Make the active page bold */
+  border-radius: 50%;
+  /* Round the edges */
+}
+
+.icon-button:hover {
+  color: var(--main-color);
+}
+
+.custom-tooltip {
+  font-size: 12px;
+  padding: 5px 5px;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+}
+
+/* Decrease padding inside input fields */
+.p-inputtext,
+.p-dropdown {
+  padding: 0.25rem 0.5rem;
+  /* Adjust to reduce padding */
+  box-shadow: none;
+  /* Ensure no shadow is applied */
+}
+
+/* Remove focus border color */
+.p-inputtext:focus,
+.p-dropdown:focus {
+  outline: none;
+  border-color: #d1d5db;
+  border-radius: 2px;
+  box-shadow: none;
+  /* Remove focus glow */
+}
+
+/* Compact floating labels */
+.p-float-label > input,
+.p-float-label > .p-dropdown {
+  padding: 0.25rem 0.5rem;
+  /* Reduce padding for floating-label inputs */
+}
+
+.p-float-label > label {
+  font-size: 0.75rem;
+  margin-left: -8px;
+}
+
+.p-datatable .p-cell-editing .p-inputtext,
+.p-datatable .p-cell-editing .p-inputnumber {
+  width: 100%;
+  /* Make sure the input takes the full width of the cell */
+}
+
+.p-datatable .p-cell-editing .p-inputnumber {
+  max-width: 100%;
+  /* Ensure the input doesn't overflow */
+}
+
+
+/* Ensure higher specificity */
+.custom-select-button .p-button, /* For individual buttons */
+.custom-select-button .p-highlight {
+  background-color: var(--main-color) !important; /* Force your main color */
+  color: white !important; /* Ensure text is white */
+  border-color: var(--main-color) !important; /* Optional: Match border color */
+}
+
+/* Handle hover state */
+.custom-select-button .p-button:hover {
+  background-color: var(--main-color) !important; /* Maintain main color on hover */
+  color: white !important;
+}
+
+/* Transition for smooth effect */
+.custom-select-button .p-button {
+  transition: background-color 0.3s, color 0.3s;
+
+}
+
+.custom-tooltip {
+  font-weight: normal; /* Set font weight to normal */
+  font-size: 14px; /* Optional: Adjust font size */
+  background-color: #333; /* Optional: Customize background color */
+  color: white; /* Optional: Customize text color */
+  border-radius: 4px; /* Optional: Add rounded corners */
+  padding: 5px 10px; /* Optional: Adjust padding */
+}
+
+

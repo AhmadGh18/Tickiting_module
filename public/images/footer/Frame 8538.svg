@@ -1,0 +1,8 @@
+<svg width="40" height="30" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="10" height="10" fill="white"/>
+    <rect x="15" width="10" height="10" fill="white"/>
+    <rect x="30" width="10" height="10" fill="white"/>
+    <rect y="15" width="10" height="10" fill="white"/> <!-- Adjusted y value -->
+    <rect x="15" y="15" width="10" height="10" fill="white"/> <!-- Adjusted y value -->
+    <rect x="30" y="15" width="10" height="10" fill="white"/> <!-- Adjusted y value -->
+</svg>

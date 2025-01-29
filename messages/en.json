@@ -1,0 +1,77 @@
+{
+
+  "header":{
+    "notifications": "Notifications",
+    "announcements": "Announcements",
+    "translation": "Translation"
+    },
+
+
+    
+  "common":{
+  "home": "Home",
+  "message": "Welcome Angelina Smith",
+  "from": "Active from",
+  "clock": "Clock In"
+  },
+
+  "project":{
+    "project": "Project"
+    },
+
+    "dashboard":{
+      "openTasks": "Open Tasks",
+      "projects": "Projects",
+      "hrsLogged": "Hrs Log/Mon",
+      "hrs": "hrs"
+    },
+
+    "announcement":{
+        "announcement": "Announcement"
+        },
+        "todayTasks":{
+          "todayTasks": "Today Tasks",
+          "uncollapseAll": "Uncollapse all",
+          "collapseAll": "Collapse all"
+
+          },
+          "customersTickets":{
+            "customersTickets": "Customers Tickets",
+            "uncollapseAll": "Uncollapse all",
+            "collapseAll": "Collapse all"
+            },
+            "sidebar":{
+              "angela": "Angelina Smith",
+              "designer": "Designer",
+              "home": "Home",
+              "projects": "Projects",
+              "notes": "Notes",
+              "finance": "Finance",
+              "attendance": "Attendance",
+              "users": "Users",
+              "dailyReport": "Daily Report",
+              "contracts": "Contracts",
+              "settings": "Settings",
+              "logout": "Logout"
+              },
+
+              "login":{
+                "email": "Email",
+                "password": "Password",
+                "usernameRequired" : "Username is required!",
+                "username": "Username",
+                "loginFailed": "Wrong username or password!",
+                "rememberMe": "Remember Me",
+                "forgotPassword": "Forgot Password?",
+                "login": "Login",
+                "emailRequired": "Email is required!",
+                "passwordRequired": "Password is required!",
+                "welcomeBack": "Welcome Back!",
+                "english": "English",
+                "french": "Français",
+                "arabic": "العربية"
+                }
+
+
+  
+}
