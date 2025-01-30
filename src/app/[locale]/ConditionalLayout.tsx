@@ -45,7 +45,7 @@ const ConditionalLayout: React.FC<ConditionalLayoutProps> = ({
   }, [initialLocale]);
 
   return (
-    <div className="h-screen" style={{ backgroundImage: 'url(/images/background-light.svg)', backgroundSize: 'cover' }}>
+    <div className="h-screen" style={{ backgroundImage: 'url(/images/background-light.svg)', backgroundSize: 'cover',height:"auto" }}>
       {showHeader && (
         <Header onLocaleChange={handleLocaleChange} currentLocale={locale} />
       )}
