@@ -16,8 +16,8 @@ const ViewTicket = () => {
   ];
 
   return (
-    <div className='bg-gray-300 w-fit p-6 pt-9 z-50 rounded-md shadow-lg mb-2'>
-      <div className='w-[600px] bg-white p-4 flex flex-col rounded-lg gap-4 shadow-md'>
+    <div className='bg-gray-300 md:w-fit md:p-6 pt-9 z-50 rounded-md shadow-lg mb-2 m-0 w-full'>
+      <div className='md:w-[600px] w-full bg-white p-4 flex flex-col rounded-lg gap-4 shadow-md '>
         {/** Assigned By */}
         <TicketRow
           icon='pi-user-edit'
