@@ -28,11 +28,19 @@ const Tickitingform = () => {
       const quillInstance = new Quill(quillRef.current, {
         modules: {
           toolbar: "#toolbar",
+          history: {
+            delay: 1000,
+            maxStack: 100,
+            userOnly: true,
+          },
         },
+        
         placeholder: "Enter Description ...",
         theme: "snow",
       });
-
+      document.querySelector(".ql-undo").addEventListener("click", () => quillInstance.history.undo());
+      document.querySelector(".ql-redo").addEventListener("click", () => quillInstance.history.redo());
+  
       quillInstance.on("text-change", () => {
         setTicketInfo((prev) => ({
           ...prev,
@@ -103,6 +111,8 @@ const Tickitingform = () => {
           <button className="ql-list" value="bullet"></button>
           <button className="ql-align" value=""></button>
           <button className="ql-align" value="right"></button>
+          <button className="ql-undo pi-undo pi"></button>
+          <button className="ql-redo pi-arrow-right pi"></button>
         </div>
         <div ref={quillRef} className="h-[200px] overflow-auto bg-white border rounded-md p-2" />
       </div>

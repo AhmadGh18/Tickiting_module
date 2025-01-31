@@ -3,7 +3,7 @@ import Tickitingform from './Tickitingform'
 
 const page = () => {
   return (
-    <div className='h-auto '>
+    <div className='h-auto'>
         <Tickitingform/>
     </div>
   )
