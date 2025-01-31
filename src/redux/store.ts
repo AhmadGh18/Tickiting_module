@@ -1,11 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import refreshReducer from './slices/refreshSlice'; 
 import posReducer from './slices/posSlice';
+import statusReducer from './slices/statusSlice';
 
 const store = configureStore({
     reducer: {
         refresh: refreshReducer, // Add reducers here
         pos: posReducer,
+        status: statusReducer,  // Add the status reducer to the store
+
     },
 });
 
