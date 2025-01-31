@@ -3,8 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "primeicons/primeicons.css";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
-
-const Tickitingform = ({ setIsOpen }) => {
+const EditTicket = ({ setIsOpen }) => {
   const [ticketInfo, setTicketInfo] = useState({
     title: "",
     description: "",
@@ -13,7 +12,10 @@ const Tickitingform = ({ setIsOpen }) => {
     assignedTo: "",
     files: [],
   });
-
+  useEffect(() => {
+    const timer = setTimeout(() => setIsOpen(true), 100);
+    return () => clearTimeout(timer);
+  }, [setIsOpen]);
   const quillRef = useRef(null);
   const quillInstanceRef = useRef<Quill | null>(null);
 
@@ -67,7 +69,7 @@ const Tickitingform = ({ setIsOpen }) => {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-gray-100 p-6 rounded-lg shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full mt-3">
+    <div className="max-w-lg mx-auto  bg-gray-100 md:mt-[-40px] p-6 rounded-lg shadow-md absolute md:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full top-[30vh]">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <button
@@ -79,7 +81,7 @@ const Tickitingform = ({ setIsOpen }) => {
           className="bg-yellow-400 px-4 py-2 text-black font-semibold rounded-lg"
           onClick={handleSubmit}
         >
-          Save
+          edit
         </button>
       </div>
 
@@ -95,6 +97,7 @@ const Tickitingform = ({ setIsOpen }) => {
           onChange={handleChange}
           className="w-full p-2 border rounded-md focus:ring-2 focus:ring-yellow-400"
           placeholder="Title"
+          
         />
       </div>
 
@@ -202,4 +205,5 @@ const Tickitingform = ({ setIsOpen }) => {
   );
 };
 
-export default Tickitingform;
+
+export default EditTicket;
