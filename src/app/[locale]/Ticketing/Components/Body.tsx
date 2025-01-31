@@ -6,6 +6,8 @@ import { Badge } from "primereact/badge";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import Image from "next/image";
+import EditTicket from "./EditTicket";
+import ViewTicket from "./ViewTicket";
 
 type Ticket = {
   id: number;
@@ -125,6 +127,7 @@ const Body = () => {
   const [visibleDialog, setVisibleDialog] = useState<string | null>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
 //   horizontal scroll functionality
   const scroll = (direction: "left" | "right") => {
@@ -161,7 +164,7 @@ const Body = () => {
 //   this is the menu items for the options menu (dummy dialog to be changed)
   const ticketMenuItems = (id: string) => [
     { label: "View Ticket", icon: "pi pi-eye", command: () => setVisibleDialog("view") },
-    { label: "Edit Ticket", icon: "pi pi-pencil", command: () => setVisibleDialog("edit") },
+    { label: "Edit Ticket", icon: "pi pi-pencil", command: () =>   setIsFormOpen(true)},
   ];
 
   return (
@@ -180,6 +183,7 @@ const Body = () => {
           onClick={() => scroll("right")}
         />
       )}
+        {/* {isFormOpen && <EditTicket setIsOpen={setIsFormOpen} />} */}
 
       <div ref={scrollContainerRef} className="flex gap-4 overflow-x-hidden scrollbar-hide">
         {Object.entries(tickets).map(([status, ticketList]) => (
