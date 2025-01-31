@@ -8,7 +8,7 @@ import { Dialog } from "primereact/dialog";
 import Image from "next/image";
 
 type Ticket = {
-  id: string;
+  id: number;
   title: string;
   assignedTo: string;
   assignee: string;
@@ -27,7 +27,7 @@ type Tickets = {
 const tickets: Tickets = {
   opened: [
     {
-      id: "1",
+      id: 1,
       title: "Frontend",
       assignedTo: "Ali Khalife",
       assignee: "Riham2 Khafeja",
@@ -37,7 +37,7 @@ const tickets: Tickets = {
       image: "",
     },
     {
-      id: "7",
+      id: 7,
       title: "UI/UX",
       assignedTo: "Ali Khalife",
       assignee: "Riham2 Khafeja",
@@ -47,7 +47,7 @@ const tickets: Tickets = {
       image: "",
     },
     {
-      id: "4",
+      id: 4,
       title: "Security",
       assignedTo: "Ali Khalife",
       assignee: "Riham2 Khafeja",
@@ -57,7 +57,7 @@ const tickets: Tickets = {
       image: "",
     },
     {
-      id: "2",
+      id: 2,
       title: "Backend",
       assignedTo: "Ali Khalife",
       assignee: "Mhmd Hashem",
@@ -69,7 +69,7 @@ const tickets: Tickets = {
   ],
   closed: [
     {
-      id: "3",
+      id: 3,
       title: "Database",
       assignedTo: "Ali Khalife",
       assignee: "Ali Moussa",
@@ -81,7 +81,7 @@ const tickets: Tickets = {
   ],
   progress: [
     {
-      id: "9",
+      id: 9,
       title: "MobileApp",
       assignedTo: "Ali Khalife",
       assignee: "Ali Moussa",
@@ -93,7 +93,7 @@ const tickets: Tickets = {
   ],
   archived: [
     {
-      id: "10",
+      id: 10,
       title: "C++",
       assignedTo: "Ali Khalife",
       assignee: "Ali Moussa",
@@ -197,7 +197,7 @@ const Body = () => {
                   <div className="flex justify-between items-center">
                     <h1 className="font-bold text-lg">{ticket.title}</h1>
                     <Button icon="pi pi-ellipsis-v" className="p-button-text" onClick={(e) => menu.current?.toggle(e)} />
-                    <Menu model={ticketMenuItems(ticket.id)} popup ref={menu} className="bg-white shadow-lg border-none rounded-lg" />
+                    <Menu model={ticketMenuItems(ticket.id.toString())} popup ref={menu} className="bg-white shadow-lg border-none rounded-lg" />
                   </div>
                   <div className="flex justify-between items-center mt-3 mb-3 text-gray-800">
                     <div className="flex items-center gap-1">
