@@ -26,6 +26,7 @@
     "nookies": "^2.5.2",
     "primeicons": "^7.0.0",
     "primereact": "^10.9.2",
+    "prop-types": "^15.8.1",
     "qs": "^6.13.1",
     "quill": "^2.0.3",
     "react": "^19.0.0",

@@ -1,182 +1,237 @@
-import { Dialog } from "@headlessui/react";
-import { MultiSelect } from "primereact/multiselect";
-import { Dropdown } from "primereact/dropdown";
-import { Checkbox } from "primereact/checkbox";
-import { Button } from "primereact/button";
-import { Filter } from "lucide-react";
 import { useState } from "react";
+import { MultiSelect } from "primereact/multiselect";
+import { Calendar } from "primereact/calendar";
+import { Button } from "primereact/button";
+import { Checkbox } from "primereact/checkbox";
+import { Panel } from "primereact/panel";
 
-interface FilterDrawerProps {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+
+
+interface FilterData {
+  assignedBy: string[];
+  assignees: string[];
+  priority: string[];
+  status: string[];
+  dateRange: { min: Date | null; max: Date | null };
 }
 
-const FilterDrawer: React.FC<FilterDrawerProps> = ({ isOpen, setIsOpen }) => {
-  const [transitioning, setTransitioning] = useState(false);
+const FilterDrawer = ({ isOpen, onClose, onApply }: { isOpen: boolean; onClose: () => void; onApply: (filterData: FilterData) => void }) => {
 
-  const closeDialog = () => {
-    setTransitioning(true); // Start transition
-    setTimeout(() => {
-      setIsOpen(false); // Close after transition
-    }, 300); // Match duration of the CSS transition
-  };
-  const [filters, setFilters] = useState({
+
+  
+  const [formData, setFormData] = useState<FilterData>({
     assignedBy: [],
-    assignee: [],
+    assignees: [],
     priority: [],
     status: [],
-    createdAtMin: "",
-    createdAtMax: "",
+    dateRange: { min: null, max: null },
   });
 
-  const users = [
-    { name: "User 1", code: "User1" },
-    { name: "User 2", code: "User2" },
-    { name: "User 3", code: "User3" },
-  ];
-
-  const assignees = [
-    { name: "User A", code: "UserA" },
-    { name: "User B", code: "UserB" },
-    { name: "User C", code: "UserC" },
-  ];
+  const convertToFormData = (filterData: FilterData): FormData => {
+    const formData = new FormData();
+  
+    // Convert FilterData properties to FormData entries
+    formData.append('assignedBy', JSON.stringify(filterData.assignedBy));
+    formData.append('assignees', JSON.stringify(filterData.assignees));
+    formData.append('priority', JSON.stringify(filterData.priority));
+    formData.append('status', JSON.stringify(filterData.status));
+    formData.append('dateRange', JSON.stringify(filterData.dateRange));
+  
+    return formData;
+  };
+  
+  
 
   const priorities = ["High", "Medium", "Low"];
-
-  const statuses = ["Pending", "In Progress", "Completed"];
+  const statuses = ["Open", "In Progress", "Closed"];
+  const users = ["User1", "User2", "User3"];
+  const assignees = ["Assignee1", "Assignee2", "Assignee3"];
 
   return (
-    <Dialog
-      open={isOpen}
-      onClose={() => setIsOpen(false)}
-      className="fixed inset-0 z-50 w-full h-full transition-opacity duration-300 ease-in-out"
+    <div
+      className={`fixed top-0 right-0 w-96 h-full bg-white shadow-lg p-5 transition-transform ${
+        isOpen ? "translate-x-0 z-50" : "translate-x-full"
+      }`}
     >
-      {/* Drawer Panel */}
-      <Dialog.Panel
-        className={`bg-white p-6 h-full fixed right-0 top-0 shadow-lg w-1/3 max-w-md transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        {/* Modal Header */}
-        <Dialog.Title className="text-2xl font-bold flex items-center gap-2 text-gray-800">
-          <Filter className="text-[#FACC15]" size={24} />
-          Advanced Filters
-        </Dialog.Title>
+      <h2 className="text-lg font-bold mb-4">Advanced Filters</h2>
 
-        {/* Assigned By (MultiSelect) */}
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-700">Assigned By</label>
-          <MultiSelect
-            value={filters.assignedBy}
-            options={users}
-            onChange={(e) => setFilters({ ...filters, assignedBy: e.value })}
-            optionLabel="name"
-            placeholder="Select Assigned By"
-            className="w-full mt-2"
-            display="chip"
-            panelClassName="bg-white shadow-lg border border-gray-300 rounded-md"
-          />
-        </div>
+      {/* Assigned By Filter */}
+      <Panel header="Assigned By" toggleable>
+        <MultiSelect
+          value={formData.assignedBy}
+          options={users}
+          onChange={(e) => setFormData({ ...formData, assignedBy: e.value })}
+          placeholder="Select Assigned By"
+          display="chip"
+          className="w-full"
+          checkboxIcon="none"
+          panelClassName="bg-gray-100"
+          filter
+          filterPlaceholder="Search user..."
+          virtualScrollerOptions={{ itemSize: 38 }}
+          // Custom Dropdown Items
+          itemTemplate={(option) => {
+            const isSelected = formData.assignedBy.includes(option);
 
-        {/* Assignee (MultiSelect) */}
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-700">Assignee</label>
-          <MultiSelect
-            value={filters.assignee}
-            options={assignees}
-            onChange={(e) => setFilters({ ...filters, assignee: e.value })}
-            optionLabel="name"
-            placeholder="Select Assignee"
-            className="w-full mt-2"
-            display="chip"
-            panelClassName="bg-white shadow-lg border border-gray-300 rounded-md"
-
-          />
-        </div>
-
-        {/* Priority (Checkboxes) */}
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-700">Priority</label>
-          <div className="flex flex-wrap gap-3 mt-2">
-            {priorities.map((priority) => (
-              <div key={priority} className="flex items-center gap-2">
-                <Checkbox
-                  inputId={priority}
-                  value={priority}
-                  onChange={(e) => {
-                    const newPriorities = filters.priority.includes(e.value)
-                      ? filters.priority.filter((p) => p !== e.value)
-                      : [...filters.priority, e.value];
-                    setFilters({ ...filters, priority: newPriorities });
-                  }}
-                  checked={filters.priority.includes(priority)}
-                />
-                <label htmlFor={priority}>{priority}</label>
+            return (
+              <div
+                className={`flex items-center px-4 py-2 rounded-md transition-all cursor-pointer 
+        ${isSelected ? "bg-yellow-200" : "hover:bg-gray-200"}`}
+                onClick={() => {
+                  const newSelection = isSelected
+                    ? formData.assignedBy.filter((user) => user !== option)
+                    : [...formData.assignedBy, option];
+                  setFormData({ ...formData, assignedBy: newSelection });
+                }}
+              >
+                <span className="text-gray-800 font-medium">{option}</span>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Status (Dropdown) */}
-        <div className="mt-4">
-  <label className="block text-sm font-medium text-gray-700">Status</label>
-  <div className="flex flex-wrap gap-3 mt-2">
-    {statuses.map((status) => (
-      <div key={status} className="flex items-center gap-2">
-        <Checkbox
-          inputId={status}
-          value={status}
-          onChange={(e) => {
-            const newStatuses = filters.status.includes(e.value)
-              ? filters.status.filter((s) => s !== e.value)
-              : [...filters.status, e.value];
-            setFilters({ ...filters, status: newStatuses });
+            );
           }}
-          checked={filters.status.includes(status)}
         />
-        <label htmlFor={status}>{status}</label>
-      </div>
-    ))}
-  </div>
-</div>
+      </Panel>
 
+      {/* Assignees Filter */}
+      <Panel header="Assignees" toggleable>
+        <MultiSelect
+          value={formData.assignees}
+          options={assignees}
+          onChange={(e) => setFormData({ ...formData, assignees: e.value })}
+          placeholder="Select Assignees"
+          display="chip"
+          className="w-full"
+          panelClassName="bg-gray-100"
+          checkboxIcon="none"
+          filter
+          filterPlaceholder="Search assignee..."
+          virtualScrollerOptions={{ itemSize: 38 }}
+          itemTemplate={(option) => {
+            const isSelected = formData.assignees.includes(option);
 
-        {/* Created At (Min & Max Date) */}
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-700">Created At</label>
-          <div className="flex gap-3 mt-2">
-            <input
-              type="date"
-              className="w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-[#FACC15] focus:outline-none shadow-sm"
-              onChange={(e) => setFilters({ ...filters, createdAtMin: e.target.value })}
+            return (
+              <div
+                className={`flex items-center px-4 py-2 rounded-md transition-all cursor-pointer 
+        ${isSelected ? "bg-yellow-200" : "hover:bg-gray-200"}`}
+                onClick={() => {
+                  const newSelection = isSelected
+                    ? formData.assignees.filter((user) => user !== option)
+                    : [...formData.assignees, option];
+                  setFormData({ ...formData, assignees: newSelection });
+                }}
+              >
+                <span className="text-gray-800 font-medium">{option}</span>
+              </div>
+            );
+          }}
+        />
+      </Panel>
+
+      {/* Priority Filter */}
+      <Panel header="Priority" toggleable>
+        {priorities.map((priority) => (
+          <div key={priority} className="flex items-center gap-2">
+            <Checkbox
+              inputId={priority}
+              checked={formData.priority.includes(priority)}
+              onChange={(e) => {
+                const newPriority = e.checked
+                  ? [...formData.priority, priority]
+                  : formData.priority.filter((p) => p !== priority);
+                setFormData({ ...formData, priority: newPriority });
+              }}
+              icon="none"
             />
-            <input
-              type="date"
-              className="w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-[#FACC15] focus:outline-none shadow-sm"
-              onChange={(e) => setFilters({ ...filters, createdAtMax: e.target.value })}
-            />
+            <label htmlFor={priority}>{priority}</label>
           </div>
-        </div>
+        ))}
+      </Panel>
 
-        {/* Action Buttons */}
-        <div className="flex justify-end mt-6 gap-3">
-          <Button
-            label="Cancel"
-            className="p-button-secondary"
-            onClick={() => setIsOpen(false)}
+      {/* Status Filter */}
+      <Panel header="Status" toggleable>
+        {statuses.map((status) => (
+          <div key={status} className="flex items-center gap-2">
+            <Checkbox
+              inputId={status}
+              checked={formData.status.includes(status)}
+              onChange={(e) => {
+                const newStatus = e.checked
+                  ? [...formData.status, status]
+                  : formData.status.filter((s) => s !== status);
+                setFormData({ ...formData, status: newStatus });
+              }}
+              icon="none"
+            />
+            <label htmlFor={status}>{status}</label>
+          </div>
+        ))}
+      </Panel>
+
+      {/* Date Range Filter */}
+      <Panel header="Date Range" toggleable>
+        <div className="flex gap-2">
+          <Calendar
+            value={formData.dateRange.min}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                dateRange: { ...formData.dateRange, min: e.value ? new Date(e.value) : null }, // Convert to Date
+              })
+            }
+            placeholder="Min Date"
+            className="w-1/2"
+            showIcon
+            panelClassName=" bg-gray-100"
           />
-          <Button
-            label="Apply Filters"
-            className="p-button-warning"
-            onClick={() => {
-              console.log(filters);
-              closeDialog();
-            }}
+          <Calendar
+            value={formData.dateRange.max}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                dateRange: { ...formData.dateRange, max: e.value ? new Date(e.value) : null }, // Convert to Date
+              })
+            }
+            placeholder="Max Date"
+            className="w-1/2"
+            showIcon
+            panelClassName=" bg-gray-100"
           />
         </div>
-      </Dialog.Panel>
-    </Dialog>
+      </Panel>
+
+      {/* Apply & Close Buttons */}
+      <div className="mt-5 flex gap-3">
+        <Button
+          label="Apply"
+          onClick={() => onApply(formData)}
+          
+          className="w-full bg-[#FDC90E] hover:bg-black hover:text-[#FDC90E] text-black font-semibold rounded-lg py-1 px-10 transition-all duration-300 ease-in-out"
+        />
+        <Button
+          label="Close"
+          severity="secondary"
+          onClick={onClose}
+          className="w-full bg-[#FDC90E] hover:bg-black hover:text-[#FDC90E] text-black font-semibold rounded-lg py-1 px-10 transition-all duration-300 ease-in-out"
+        />
+      </div>
+      <div className="mt-5 flex gap-3">
+        <Button
+          label="Clear All Filters"
+          severity="secondary"
+          onClick={() =>
+            setFormData({
+              assignedBy: [],
+              assignees: [],
+              priority: [],
+              status: [],
+              dateRange: { min: null, max: null },
+            })
+          }
+          className="w-full bg-[#FDC90E] hover:bg-black hover:text-[#FDC90E] text-black font-semibold rounded-lg py-1 px-10 transition-all duration-300 ease-in-out"
+        />
+      </div>
+    </div>
   );
 };
+
 
 export default FilterDrawer;

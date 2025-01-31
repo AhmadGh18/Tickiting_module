@@ -1,14 +1,17 @@
-"use client";  // Add this at the top of your file
+"use client";  // Required for Next.js
 
-import React, { useState } from "react"; // Now useState will work
-import { Toolbar } from "primereact/toolbar";
+import React, { useState } from "react";
 import { Button } from "primereact/button";
 import { SplitButton } from "primereact/splitbutton";
 import FilterDrawer from "./FilterDrawer";
+import Tickitingform from "./Tickitingform";
 
 const Header = () => {
   const [inputValue, setInputValue] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
+  const [filters, setFilters] = useState({});
 
   const items = [
     { label: "Update", icon: "pi pi-refresh", command: () => {} },
@@ -16,32 +19,30 @@ const Header = () => {
   ];
 
   const startContent = (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2 md:gap-4">
       <Button
         label="Create Ticket"
         icon="pi pi-plus"
         iconPos="right"
-        style={{ gap: "8px" }}
-        className="bg-[#FACC15] hover:bg-[#edcd5a] text-white font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out"
-        onClick={() => console.log("Button clicked")}
+        className="bg-[#FDC90E] hover:bg-black hover:text-[#FDC90E] text-black font-semibold rounded-lg py-1 px-4 transition-all duration-300"
+        onClick={() => setIsFormOpen(true)} 
       />
       <Button
         label="Create Status"
         icon="pi pi-plus"
         iconPos="right"
-        style={{ gap: "8px" }}
-        className="bg-[#FACC15] hover:bg-[#edcd5a] text-white font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out"
-        onClick={() => console.log("Button clicked")}
+        className="bg-[#FDC90E] hover:bg-black hover:text-[#FDC90E] text-black font-semibold rounded-lg py-1 px-4 transition-all duration-300"
       />
     </div>
   );
 
   const centerContent = (
-    <div className="relative flex items-center justify-center">
+    <div className="relative flex items-center w-full md:w-auto">
       <input
         type="text"
         placeholder="Search"
-        className="w-64 p-2 pl-10 border-2 border-gray-300 rounded-full transition-all duration-300 outline-none focus:border-[#FACC15] focus:ring-2 focus:ring-[#FACC15] ${inputValue ? 'placeholder:opacity-0' : 'placeholder:opacity-100'}"
+        className={`w-full md:w-64 p-2 pl-10 border-2 border-gray-300 rounded-full transition-all 
+          outline-none focus:border-[#FACC15] focus:ring-2 focus:ring-[#FACC15]`}
         onChange={(e) => setInputValue(e.target.value)}
         value={inputValue}
       />
@@ -56,31 +57,35 @@ const Header = () => {
   );
 
   const endContent = (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2 md:gap-4">
       <Button
         label="Show Logs"
-        className="bg-[#FACC15] hover:bg-[#edcd5a] text-white font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out"
+        className="bg-[#FDC90E] hover:bg-black hover:text-[#FDC90E] text-black font-semibold rounded-lg py-1 px-4 transition-all duration-300"
         icon="pi pi-arrow-up-right" 
         iconPos="right"
-        onClick={() => console.log("Button clicked")}
       />
       <SplitButton
         label="Projects"
-        
         model={items}
-        className="bg-[#FACC15] hover:bg-[#edcd5a] text-white font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out"
+        className="bg-[#FDC90E] hover:bg-black hover:text-[#FDC90E] text-black font-semibold rounded-lg py-1 px-4 transition-all duration-300"
       />
     </div>
   );
-
   return (
     <div className="bg-white rounded shadow-md p-4">
-      <div className="grid grid-cols-3 gap-4 items-center w-full">
-        <div className="flex justify-start">{startContent}</div>
-        <div className="flex justify-center">{centerContent}</div>
-        <div className="flex justify-end">{endContent}</div>
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 w-full">
+        <div className="w-full md:w-auto flex justify-center md:justify-start">{startContent}</div>
+        <div className="w-full md:w-auto flex justify-center">{centerContent}</div>
+        <div className="w-full md:w-auto flex justify-center md:justify-end">{endContent}</div>
       </div>
-      <FilterDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
+        {/* Ticket Form Modal */}
+        {isFormOpen && <Tickitingform setIsOpen={setIsFormOpen} />}
+
+  
+      <FilterDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} onApply={(formData) => {
+          setFilters(formData);
+          setIsOpen(false);
+        }} />
     </div>
   );
 };
