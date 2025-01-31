@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "primeicons/primeicons.css";
 
 :root {
   --main-color: #007bff;
@@ -10,6 +11,42 @@
 
 body {
   background-color: var(--bg-color);
+}
+
+/* Animation for the options menu */
+.submenu-animation .p-submenu {
+  opacity: 0;
+  transform: scaleY(0);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+.submenu-animation .p-submenu.p-active {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/* Hover effects for options */
+.p-menuitem:hover {
+  background-color: #f5f5f5;
+  transition: background-color 0.3s;
+}
+.p-menuitem {
+  padding: 10px 20px;
+}
+
+/* scrollbar customizations */
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: #5555553d;
+  border-radius: 5px;
+  margin: 0;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 
@@ -150,5 +187,3 @@ body {
   border-radius: 4px; /* Optional: Add rounded corners */
   padding: 5px 10px; /* Optional: Adjust padding */
 }
-
-

@@ -1,12 +1,11 @@
 import React from 'react'
-
-import Header from './Components/Header'
+import Body from './Components/Body'
 
 const page = () => {
   return (
     <div className='h-auto '>
       
-        <Header/>
+        <Body/>
     
     </div>
   )
