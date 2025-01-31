@@ -18,30 +18,6 @@ const Tickitingform = ({ setIsOpen }) => {
   const quillInstanceRef = useRef<Quill | null>(null);
 
   useEffect(() => {
-    if (quillRef.current) {
-      const quillInstance = new Quill(quillRef.current, {
-        modules: {
-          toolbar: "#toolbar",
-          history: {
-            delay: 1000,
-            maxStack: 100,
-            userOnly: true,
-          },
-        },
-        
-        placeholder: "Enter Description ...",
-        theme: "snow",
-      });
-      document.querySelector(".ql-undo").addEventListener("click", () => quillInstance.history.undo());
-      document.querySelector(".ql-redo").addEventListener("click", () => quillInstance.history.redo());
-  
-      quillInstance.on("text-change", () => {
-        setTicketInfo((prev) => ({
-          ...prev,
-          description: quillInstance.root.innerHTML, 
-        }));
-      });
-    }
     const timer = setTimeout(() => setIsOpen(true), 100);
     return () => clearTimeout(timer);
   }, [setIsOpen]);
@@ -91,7 +67,7 @@ const Tickitingform = ({ setIsOpen }) => {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-gray-100 p-6 rounded-lg shadow-md">
+    <div className="max-w-lg mx-auto bg-gray-100 p-6 rounded-lg shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <button
@@ -125,17 +101,6 @@ const Tickitingform = ({ setIsOpen }) => {
       {/* Description */}
       <div className="mb-4">
         <label className="block text-sm font-semibold mb-1">Description</label>
-        <div id="toolbar">
-          <button className="ql-bold"></button>
-          <button className="ql-italic"></button>
-          <button className="ql-list" value="bullet"></button>
-          <button className="ql-align" value=""></button>
-          <button className="ql-align" value="right"></button>
-          <button className="ql-undo pi-undo pi"></button>
-          <button className="ql-redo pi-arrow-right pi"></button>
-        </div>
-        <div ref={quillRef} className="h-[200px] overflow-auto bg-white border rounded-md p-2" />
-
         <div ref={quillRef} className="h-[200px] bg-white border rounded-md p-2"></div>
       </div>
 
