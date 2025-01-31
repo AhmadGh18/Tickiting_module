@@ -184,7 +184,9 @@ const Body = () => {
         />
       )}
         {/* {isFormOpen && <EditTicket setIsOpen={setIsFormOpen} />} */}
-
+<center>
+<ViewTicket/>
+</center>
       <div ref={scrollContainerRef} className="flex gap-4 overflow-x-hidden scrollbar-hide">
         {Object.entries(tickets).map(([status, ticketList]) => (
           <div key={status} className="flex flex-col bg-white shadow-lg rounded-lg p-4 w-96 flex-shrink-0" style={{ height: "calc(100vh - 100px)" }}>
