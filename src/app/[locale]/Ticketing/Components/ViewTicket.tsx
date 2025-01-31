@@ -95,11 +95,11 @@ const TicketRow = ({ icon, label, avatarSrc, name, children }: any) => (
 );
 
 const Comment = ({ name, text, avatarSrc }: any) => (
-  <div className='flex gap-3 items-start border-b pb-2 mb-2'>
+  <div className='flex gap-3 items-start border-b pb-2 mb-2 justify-start'>
     <img className='h-8 w-8 rounded-full' src={avatarSrc} alt='User Avatar' />
-    <div>
+    <div className='text-left'>
       <p className='font-semibold text-gray-800'>{name}</p>
-      <p className='text-gray-700 text-sm'>{text}</p>
+      <p className='text-gray-700 text-sm '>{text}</p>
     </div>
   </div>
 );
