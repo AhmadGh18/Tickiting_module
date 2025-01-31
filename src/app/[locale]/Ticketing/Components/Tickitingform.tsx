@@ -1,12 +1,10 @@
-"use client";  
-import React, { useEffect, useRef, useState } from 'react';
+"use client";
+import React, { useEffect, useRef, useState } from "react";
 import "primeicons/primeicons.css";
-import { Editor } from "primereact/editor";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 
-const Tickitingform = () => {
-  const [showForm, setShowForm] = useState(false);
+const Tickitingform = ({ setIsOpen }) => {
   const [ticketInfo, setTicketInfo] = useState({
     title: "",
     description: "",
@@ -16,12 +14,8 @@ const Tickitingform = () => {
     files: [],
   });
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShowForm(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
   const quillRef = useRef(null);
+  const quillInstanceRef = useRef<Quill | null>(null);
 
   useEffect(() => {
     if (quillRef.current) {
@@ -48,43 +42,69 @@ const Tickitingform = () => {
         }));
       });
     }
+    const timer = setTimeout(() => setIsOpen(true), 100);
+    return () => clearTimeout(timer);
+  }, [setIsOpen]);
+
+  useEffect(() => {
+    if (!quillRef.current || quillInstanceRef.current) return;
+
+    quillInstanceRef.current = new Quill(quillRef.current, {
+      modules: {
+        toolbar: [
+          ["bold", "italic", "underline"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          [{ align: [] }],
+        ],
+      },
+      placeholder: "Enter Description ...",
+      theme: "snow",
+    });
+
+    quillInstanceRef.current.on("text-change", () => {
+      setTicketInfo((prev) => ({
+        ...prev,
+        description: quillInstanceRef.current.root.innerHTML,
+      }));
+    });
   }, []);
 
-  // Handle form input change
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setTicketInfo((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle drag and drop
-  const handleDrop = (e) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const files = Array.from(e.dataTransfer.files);
     setTicketInfo((prev) => ({ ...prev, files: [...prev.files, ...files] }));
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  // Handle file selection via browse
-  const handleFileSelect = (e) => {
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files);
     setTicketInfo((prev) => ({ ...prev, files: [...prev.files, ...files] }));
   };
-  const handlesubmit=(e)=>{
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(ticketInfo)
-    }
+    console.log(ticketInfo);
+  };
+
   return (
     <div className="max-w-lg mx-auto bg-gray-100 p-6 rounded-lg shadow-md">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
-        <div className='bg-black p-1 flex justify-center items-center rounded-md'>
-          <button className="pi pi-times text-xl text-white font-extrabold hover:text-red-500 transition-all"></button>
-        </div>
+        <button
+          className="pi pi-times text-xl text-white bg-black p-2 rounded-md hover:text-red-500 transition-all"
+          onClick={() => setIsOpen(false)}
+        ></button>
         <h2 className="text-xl font-bold">New Ticket</h2>
-        <button className="bg-yellow-400 px-4 py-2 text-black font-semibold rounded-lg " onClick={handlesubmit}>Save</button>
+        <button
+          className="bg-yellow-400 px-4 py-2 text-black font-semibold rounded-lg"
+          onClick={handleSubmit}
+        >
+          Save
+        </button>
       </div>
 
       {/* Title Input */}
@@ -97,7 +117,7 @@ const Tickitingform = () => {
           name="title"
           value={ticketInfo.title}
           onChange={handleChange}
-          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          className="w-full p-2 border rounded-md focus:ring-2 focus:ring-yellow-400"
           placeholder="Title"
         />
       </div>
@@ -115,6 +135,8 @@ const Tickitingform = () => {
           <button className="ql-redo pi-arrow-right pi"></button>
         </div>
         <div ref={quillRef} className="h-[200px] overflow-auto bg-white border rounded-md p-2" />
+
+        <div ref={quillRef} className="h-[200px] bg-white border rounded-md p-2"></div>
       </div>
 
       {/* Priority */}
@@ -129,7 +151,8 @@ const Tickitingform = () => {
                 ticketInfo.priority === priority ? "bg-gray-300" : ""
               }`}
             >
-              {priority === "Urgent" ? "🔴" : priority === "High" ? "🟠" : priority === "Medium" ? "🔵" : "🟡"} {priority}
+              {priority === "Urgent" ? "🔴" : priority === "High" ? "🟠" : priority === "Medium" ? "🔵" : "🟡"}{" "}
+              {priority}
             </button>
           ))}
         </div>
@@ -162,7 +185,7 @@ const Tickitingform = () => {
           name="assignedTo"
           value={ticketInfo.assignedTo}
           onChange={handleChange}
-          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          className="w-full p-2 border rounded-md focus:ring-2 focus:ring-yellow-400"
         >
           <option value="">Select Member</option>
           <option value="John Doe">John Doe</option>
@@ -170,7 +193,7 @@ const Tickitingform = () => {
         </select>
       </div>
 
-      {/* Attach Files with Drag & Drop or Browse */}
+      {/* Attach Files */}
       <div className="mb-4">
         <label className="block text-sm font-semibold mb-1">Attach Files</label>
         <div className="flex gap-2 mb-2">
@@ -180,11 +203,19 @@ const Tickitingform = () => {
         </div>
         <div
           className="border-dashed border-2 p-4 text-center text-gray-500 rounded-md"
-          onDragOver={handleDragOver}
+          onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
         >
-          <input type="file" multiple onChange={handleFileSelect} className="hidden" id="fileUpload" />
-          <label htmlFor="fileUpload" className="cursor-pointer bg-gray-300 px-4 py-2 rounded-md">Browse...</label>
+          <input
+            type="file"
+            multiple
+            onChange={handleFileSelect}
+            className="hidden"
+            id="fileUpload"
+          />
+          <label htmlFor="fileUpload" className="cursor-pointer bg-gray-300 px-4 py-2 rounded-md">
+            Browse...
+          </label>
           <p className="text-xs mt-1">Or drop files here</p>
         </div>
 

@@ -1,10 +1,16 @@
 import React from 'react'
-import Tickitingform from './Tickitingform'
+import Body from './Components/Body'
+import Tickitingform from './Components/Tickitingform'
 
 const page = () => {
   return (
     <div className='h-auto'>
-        <Tickitingform/>
+        <Tickitingform></Tickitingform>
+    <div className='h-auto'>
+      
+        <Body/>
+    
+    </div>
     </div>
   )
 }
