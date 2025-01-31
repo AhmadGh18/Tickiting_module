@@ -7,6 +7,7 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import Image from "next/image";
 import EditTicket from "./EditTicket";
+import ViewTicket from "./ViewTicket";
 
 type Ticket = {
   id: string;
@@ -182,7 +183,7 @@ const Body = () => {
           onClick={() => scroll("right")}
         />
       )}
-        {isFormOpen && <EditTicket setIsOpen={setIsFormOpen} />}
+        {/* {isFormOpen && <EditTicket setIsOpen={setIsFormOpen} />} */}
 
       <div ref={scrollContainerRef} className="flex gap-4 overflow-x-hidden scrollbar-hide">
         {Object.entries(tickets).map(([status, ticketList]) => (

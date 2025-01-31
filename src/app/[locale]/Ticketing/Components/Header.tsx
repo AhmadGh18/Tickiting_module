@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import { SplitButton } from "primereact/splitbutton";
 import FilterDrawer from "./FilterDrawer";
 import Tickitingform from "./Tickitingform";
-
+import ViewTicket from "./ViewTicket";
 const Header = () => {
   const [inputValue, setInputValue] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -80,7 +80,6 @@ const Header = () => {
       </div>
         {/* Ticket Form Modal */}
         {isFormOpen && <Tickitingform setIsOpen={setIsFormOpen} />}
-
   
       <FilterDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} onApply={(formData) => {
           setFilters(formData);

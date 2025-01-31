@@ -67,7 +67,7 @@ const Tickitingform = ({ setIsOpen }) => {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-gray-100 p-6 rounded-lg shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full mt-3">
+    <div className="max-w-lg mx-auto bg-gray-100 p-6 rounded-lg shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full mt-3 transition-all">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <button
