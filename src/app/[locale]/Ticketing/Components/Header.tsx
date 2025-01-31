@@ -1,13 +1,12 @@
-// src/app/[locale]/Ticketing/Components/Header.tsx
-"use client";  // Required for Next.js
+"use client";  
 import { useDispatch, useSelector } from "react-redux";
-import { openManageStatuses, closeManageStatuses } from "../../../../redux/slices/statusSlice";
+import { openManageStatuses } from "../../../../redux/slices/statusSlice";
 import { useState, useRef } from "react";
 import { Menu } from "primereact/menu";
 import { Button } from "primereact/button";
 import { SplitButton } from "primereact/splitbutton";
 import FilterDrawer from "./FilterDrawer";
-import ManageStatusesModal from "./ManageStatuses"; // Import the modal component
+import ManageStatusesModal from "./ManageStatuses"; 
 import Tickitingform from "./Tickitingform";
 import { RootState } from "../../../../redux/store";
 
@@ -20,7 +19,7 @@ const isManageStatusesOpen = useSelector((state: RootState) => state.status.isMa
 
   const [inputValue, setInputValue] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const menuRef = useRef<Menu | null>(null); // Explicitly set the type to Menu
+  const menuRef = useRef<Menu | null>(null); 
 
   const menuItems = [
     {
@@ -31,17 +30,16 @@ const isManageStatusesOpen = useSelector((state: RootState) => state.status.isMa
     {
       label: "Manage Statuses",
       icon: "pi pi-cog",
-      command: () => dispatch(openManageStatuses()), // Open the modal
+      command: () => dispatch(openManageStatuses()), 
     },
   ];
-
   const startContent = (
     <div className="relative">
       <Menu model={menuItems} popup ref={menuRef} style={{ minWidth: "12rem", backgroundColor: "#FFFFFF", gap: "0.5rem" }} />
       <Button
         icon="pi pi-plus"
         className="bg-[#FDC90E] hover:bg-black hover:text-[#FDC90E] text-black font-semibold rounded-lg py-1 px-4 transition-all duration-300"
-        onClick={(event) => menuRef.current?.toggle(event)} // Now toggle() is recognized
+        onClick={(event) => menuRef.current?.toggle(event)} 
       />
     </div>
   );
@@ -86,8 +84,7 @@ const isManageStatusesOpen = useSelector((state: RootState) => state.status.isMa
 
       {isFormOpen && <Tickitingform setIsOpen={setIsFormOpen} />}
 
-      {/* Manage Statuses Modal */}
-      {isManageStatusesOpen && <ManageStatusesModal  />} {/* Conditionally render the modal */}
+      {isManageStatusesOpen && <ManageStatusesModal  />} 
 
       <FilterDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} onApply={() => setIsOpen(false)} />
     </div>

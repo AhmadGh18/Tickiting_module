@@ -5,14 +5,13 @@ import statusReducer from './slices/statusSlice';
 
 const store = configureStore({
     reducer: {
-        refresh: refreshReducer, // Add reducers here
+        refresh: refreshReducer,
         pos: posReducer,
-        status: statusReducer,  // Add the status reducer to the store
-
+        status: statusReducer,  
     },
 });
 
-export type RootState = ReturnType<typeof store.getState>; // Type for root state
-export type AppDispatch = typeof store.dispatch; // Type for dispatch
+export type RootState = ReturnType<typeof store.getState>; 
+export type AppDispatch = typeof store.dispatch; 
 
 export default store;

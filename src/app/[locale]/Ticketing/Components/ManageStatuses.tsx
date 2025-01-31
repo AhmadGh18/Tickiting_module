@@ -1,4 +1,4 @@
-// src/components/ManageStatusesModal.tsx
+
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useState } from "react";
@@ -31,7 +31,7 @@ const ManageStatusesModal = () => {
     <>
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"></div>
     <Dialog header="Manage Statuses" visible={true} onHide={() => dispatch(closeManageStatuses())} className="p-6 bg-white rounded-lg shadow-lg max-w-xl mx-auto ">
-      {/* Add New Status Section */}
+    
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Add New Status</h3>
         <div className="space-y-4">
@@ -69,7 +69,7 @@ const ManageStatusesModal = () => {
         </div>
       </div>
 <Divider />
-      {/* Edit Statuses Section */}
+    
       <div>
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Edit Statuses</h3>
         {statuses.map((status) => (

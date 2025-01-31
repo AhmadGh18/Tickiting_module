@@ -1,5 +1,5 @@
-// src/redux/slices/statusSlice.ts
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { createSlice } from '@reduxjs/toolkit';
 
 interface StatusState {
   isManageStatusesOpen: boolean;
