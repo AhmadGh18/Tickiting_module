@@ -1,5 +1,5 @@
-import type { NextConfig } from 'next';
-import createNextIntlPlugin from 'next-intl/plugin';
+import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   typescript: {
@@ -8,13 +8,14 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: { // Add the images property and domains inside it
-    domains: ['posnew.smcare.net'],
+  images: {
+    // Add the images property and domains inside it
+    domains: ["posnew.smcare.net", "thumbs.dreamstime.com"],
   },
   reactStrictMode: true,
 };
 
-const withNextIntl = createNextIntlPlugin('./i18n/request.ts'); // Updated path
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts"); // Updated path
 
 export default withNextIntl(nextConfig);
 // import type { NextConfig } from "next";

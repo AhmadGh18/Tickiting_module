@@ -5,8 +5,6 @@ import { Button } from "primereact/button";
 import { Checkbox } from "primereact/checkbox";
 import { Panel } from "primereact/panel";
 
-
-
 interface FilterData {
   assignedBy: string[];
   assignees: string[];
@@ -15,10 +13,15 @@ interface FilterData {
   dateRange: { min: Date | null; max: Date | null };
 }
 
-const FilterDrawer = ({ isOpen, onClose, onApply }: { isOpen: boolean; onClose: () => void; onApply: (filterData: FilterData) => void }) => {
-
-
-  
+const FilterDrawer = ({
+  isOpen,
+  onClose,
+  onApply,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  onApply: (filterData: FilterData) => void;
+}) => {
   const [formData, setFormData] = useState<FilterData>({
     assignedBy: [],
     assignees: [],
@@ -29,18 +32,16 @@ const FilterDrawer = ({ isOpen, onClose, onApply }: { isOpen: boolean; onClose: 
 
   const convertToFormData = (filterData: FilterData): FormData => {
     const formData = new FormData();
-  
+
     // Convert FilterData properties to FormData entries
-    formData.append('assignedBy', JSON.stringify(filterData.assignedBy));
-    formData.append('assignees', JSON.stringify(filterData.assignees));
-    formData.append('priority', JSON.stringify(filterData.priority));
-    formData.append('status', JSON.stringify(filterData.status));
-    formData.append('dateRange', JSON.stringify(filterData.dateRange));
-  
+    formData.append("assignedBy", JSON.stringify(filterData.assignedBy));
+    formData.append("assignees", JSON.stringify(filterData.assignees));
+    formData.append("priority", JSON.stringify(filterData.priority));
+    formData.append("status", JSON.stringify(filterData.status));
+    formData.append("dateRange", JSON.stringify(filterData.dateRange));
+
     return formData;
   };
-  
-  
 
   const priorities = ["High", "Medium", "Low"];
   const statuses = ["Open", "In Progress", "Closed"];
@@ -49,9 +50,9 @@ const FilterDrawer = ({ isOpen, onClose, onApply }: { isOpen: boolean; onClose: 
 
   return (
     <div
-      className={`fixed top-0 right-0 w-96 h-full bg-white shadow-lg p-5 transition-transform ${
-        isOpen ? "translate-x-0 z-50" : "translate-x-full"
-      }`}
+      className={`fixed top-0 right-0 h-full bg-white shadow-2xl p-5 transition-transform z-50 
+      w-full sm:w-80 md:w-96
+      ${isOpen ? "translate-x-0" : "translate-x-full"}`}
     >
       <h2 className="text-lg font-bold mb-4">Advanced Filters</h2>
 
@@ -60,7 +61,9 @@ const FilterDrawer = ({ isOpen, onClose, onApply }: { isOpen: boolean; onClose: 
         <MultiSelect
           value={formData.assignedBy}
           options={users}
-          onChange={(e) => setFormData({ ...formData, assignedBy: e.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, assignedBy: e.value })
+          }
           placeholder="Select Assigned By"
           display="chip"
           className="w-full"
@@ -76,7 +79,7 @@ const FilterDrawer = ({ isOpen, onClose, onApply }: { isOpen: boolean; onClose: 
             return (
               <div
                 className={`flex items-center px-4 py-2 rounded-md transition-all cursor-pointer 
-        ${isSelected ? "bg-yellow-200" : "hover:bg-gray-200"}`}
+                ${isSelected ? "bg-yellow-200" : "hover:bg-gray-200"}`}
                 onClick={() => {
                   const newSelection = isSelected
                     ? formData.assignedBy.filter((user) => user !== option)
@@ -96,7 +99,9 @@ const FilterDrawer = ({ isOpen, onClose, onApply }: { isOpen: boolean; onClose: 
         <MultiSelect
           value={formData.assignees}
           options={assignees}
-          onChange={(e) => setFormData({ ...formData, assignees: e.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, assignees: e.value })
+          }
           placeholder="Select Assignees"
           display="chip"
           className="w-full"
@@ -111,7 +116,7 @@ const FilterDrawer = ({ isOpen, onClose, onApply }: { isOpen: boolean; onClose: 
             return (
               <div
                 className={`flex items-center px-4 py-2 rounded-md transition-all cursor-pointer 
-        ${isSelected ? "bg-yellow-200" : "hover:bg-gray-200"}`}
+                ${isSelected ? "bg-yellow-200" : "hover:bg-gray-200"}`}
                 onClick={() => {
                   const newSelection = isSelected
                     ? formData.assignees.filter((user) => user !== option)
@@ -174,26 +179,32 @@ const FilterDrawer = ({ isOpen, onClose, onApply }: { isOpen: boolean; onClose: 
             onChange={(e) =>
               setFormData({
                 ...formData,
-                dateRange: { ...formData.dateRange, min: e.value ? new Date(e.value) : null }, // Convert to Date
+                dateRange: {
+                  ...formData.dateRange,
+                  min: e.value ? new Date(e.value) : null,
+                },
               })
             }
             placeholder="Min Date"
             className="w-1/2"
             showIcon
-            panelClassName=" bg-gray-100"
+            panelClassName="bg-gray-100"
           />
           <Calendar
             value={formData.dateRange.max}
             onChange={(e) =>
               setFormData({
                 ...formData,
-                dateRange: { ...formData.dateRange, max: e.value ? new Date(e.value) : null }, // Convert to Date
+                dateRange: {
+                  ...formData.dateRange,
+                  max: e.value ? new Date(e.value) : null,
+                },
               })
             }
             placeholder="Max Date"
             className="w-1/2"
             showIcon
-            panelClassName=" bg-gray-100"
+            panelClassName="bg-gray-100"
           />
         </div>
       </Panel>
@@ -203,7 +214,6 @@ const FilterDrawer = ({ isOpen, onClose, onApply }: { isOpen: boolean; onClose: 
         <Button
           label="Apply"
           onClick={() => onApply(formData)}
-          
           className="w-full bg-[#FDC90E] hover:bg-black hover:text-[#FDC90E] text-black font-semibold rounded-lg py-1 px-10 transition-all duration-300 ease-in-out"
         />
         <Button
@@ -232,6 +242,5 @@ const FilterDrawer = ({ isOpen, onClose, onApply }: { isOpen: boolean; onClose: 
     </div>
   );
 };
-
 
 export default FilterDrawer;

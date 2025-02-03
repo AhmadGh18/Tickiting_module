@@ -8,8 +8,7 @@ const page = () => {
       
 
     <div>
-        <Header />
-
+        <Header /> 
         <Body/>
     
     </div>
