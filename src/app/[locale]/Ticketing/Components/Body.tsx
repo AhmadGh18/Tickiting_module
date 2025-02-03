@@ -236,27 +236,28 @@ const Body = () => {
   return (
     <div className="relative p-4 font-sans">
       {/* Desktop Layout: Animated Carousel */}
-      <div className="hidden sm:block">
-        <div className="relative" ref={desktopContainerRef}>
-          {startIndex > 0 && (
+      {startIndex > 0 && (
             <Button
-              className="absolute top-1/2 left-0 z-10 ml-2 bg-gray-800 text-white rounded-full p-3 -translate-y-1/2"
+              className="absolute w-3 top-1/2 rounded-l-lg h-[calc(100vh-155px)] left-0 z-10 bg-[#FACC15] text-gray-800 hover:bg-gray-800 hover:text-[#FACC15] shadow-2xl p-3 -translate-y-1/2"
               icon="pi pi-chevron-left"
               onClick={handlePrev}
             />
           )}
           {startIndex + visibleCount < totalCards && (
             <Button
-              className="absolute top-1/2 right-0 z-10 mr-2 bg-gray-800 text-white rounded-full p-3 -translate-y-1/2"
+              className="absolute top-1/2 right-0 z-10 w-3 rounded-r-lg h-[calc(100vh-155px)] bg-[#FACC15] text-gray-800 hover:bg-gray-800 hover:text-[#FACC15] shadow-2xl p-3 -translate-y-1/2"
               icon="pi pi-chevron-right"
               onClick={handleNext}
             />
           )}
 
+      <div className="hidden sm:block">
+        <div className="relative" ref={desktopContainerRef}>
+          
           {/* Overflow hidden wrapper */}
           <div
             className="overflow-hidden"
-            style={{ height: "calc(100vh - 170px)" }}
+            style={{ height: "calc(100vh - 155px)" }}
           >
             {/* Animated flex container for all cards */}
             <div
@@ -269,7 +270,7 @@ const Body = () => {
                 <div
                   key={status}
                   className="flex flex-col bg-white shadow-lg rounded-lg p-4 flex-shrink-0"
-                  style={{ width: `${cardWidth}px`, height: "calc(100vh - 170px)" }}
+                  style={{ width: `${cardWidth}px`, height: "calc(100vh - 155px)" }}
                 >
                   <div className="flex items-center mb-4">
                     <div className="flex items-center gap-2">
