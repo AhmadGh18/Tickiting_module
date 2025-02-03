@@ -92,7 +92,7 @@ const tickets: Tickets = {
       image: "https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg",
     },
   ],
-  archived: [
+  urgent: [
     {
       id: 10,
       title: "C++",
@@ -104,7 +104,7 @@ const tickets: Tickets = {
       image: "https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg",
     },
   ],
-  opxxened: [
+  frontend: [
     {
       id: 1,
       title: "Frontend",
@@ -146,7 +146,7 @@ const tickets: Tickets = {
       image: "https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg",
     },
   ],
-  clocsed: [
+  backend: [
     {
       id: 3,
       title: "Database",
@@ -171,6 +171,9 @@ const statusColors: { [key: string]: string } = {
   closed: "bg-green-500",
   progress: "bg-blue-500",
   archived: "bg-gray-500",
+  urgent: "bg-red-500",
+  frontend: "bg-purple-500",
+  backend: "bg-orange-500",
 };
 
 // Priority colors mapping
