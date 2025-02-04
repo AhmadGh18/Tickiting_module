@@ -92,7 +92,7 @@ const tickets: Tickets = {
       image: "https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg",
     },
   ],
-  urgent: [
+  archived: [
     {
       id: 10,
       title: "C++",
@@ -104,7 +104,7 @@ const tickets: Tickets = {
       image: "https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg",
     },
   ],
-  frontend: [
+  opxxened: [
     {
       id: 1,
       title: "Frontend",
@@ -146,7 +146,7 @@ const tickets: Tickets = {
       image: "https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg",
     },
   ],
-  backend: [
+  clocsed: [
     {
       id: 3,
       title: "Database",
@@ -171,9 +171,6 @@ const statusColors: { [key: string]: string } = {
   closed: "bg-green-500",
   progress: "bg-blue-500",
   archived: "bg-gray-500",
-  urgent: "bg-red-500",
-  frontend: "bg-purple-500",
-  backend: "bg-orange-500",
 };
 
 // Priority colors mapping
@@ -239,24 +236,23 @@ const Body = () => {
   return (
     <div className="relative p-4 font-sans">
       {/* Desktop Layout: Animated Carousel */}
-      {startIndex > 0 && (
+      <div className="hidden sm:block">
+        <div className="relative" ref={desktopContainerRef}>
+          {startIndex > 0 && (
             <Button
-              className="absolute w-3 top-1/2 rounded-l-lg h-[calc(100vh-155px)] left-0 z-10 bg-[#FACC15] text-gray-800 hover:bg-gray-800 hover:text-[#FACC15] shadow-2xl p-3 -translate-y-1/2"
+              className="absolute top-1/2 left-0 z-10 ml-2 bg-gray-800 text-white rounded-lg p-3 -translate-y-1/2"
               icon="pi pi-chevron-left"
               onClick={handlePrev}
             />
           )}
           {startIndex + visibleCount < totalCards && (
             <Button
-              className="absolute top-1/2 right-0 z-10 w-3 rounded-r-lg h-[calc(100vh-155px)] bg-[#FACC15] text-gray-800 hover:bg-gray-800 hover:text-[#FACC15] shadow-2xl p-3 -translate-y-1/2"
+              className="absolute top-1/2 right-0 z-10 mr-2 bg-gray-800 text-white rounded-lg p-3 -translate-y-1/2"
               icon="pi pi-chevron-right"
               onClick={handleNext}
             />
           )}
 
-      <div className="hidden sm:block">
-        <div className="relative" ref={desktopContainerRef}>
-          
           {/* Overflow hidden wrapper */}
           <div
             className="overflow-hidden"
